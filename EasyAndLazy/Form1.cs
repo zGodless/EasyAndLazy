@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
 
 namespace EasyAndLazy
 {
@@ -23,14 +18,13 @@ namespace EasyAndLazy
         }
 
         #region 初始化
-
         public void Init()
         {
-            //注册热键Shift+S，Id号为100。HotKey.KeyModifiers.Shift也可以直接使用数字4来表示。
+            //注册热键
             HotKey.RegisterHotKey(Handle, 100, HotKey.KeyModifiers.Alt, Keys.J);
-            //注册热键Ctrl+B，Id号为101。HotKey.KeyModifiers.Ctrl也可以直接使用数字2来表示。
-            HotKey.RegisterHotKey(Handle, 101, HotKey.KeyModifiers.Alt, Keys.K);//注册热键Alt+D，Id号为102。HotKey.KeyModifiers.Alt也可以直接使用数字1来表示。
+            HotKey.RegisterHotKey(Handle, 101, HotKey.KeyModifiers.Alt, Keys.K);
             HotKey.RegisterHotKey(Handle, 102, HotKey.KeyModifiers.Alt, Keys.Q);
+            HotKey.RegisterHotKey(Handle, 103, HotKey.KeyModifiers.Ctrl, Keys.F);
             //窗体置顶层
             SetWindowPos(this.Handle, -1, 0, 0, 0, 0, 1 | 2);}
         public void InitEvent()
@@ -41,7 +35,8 @@ namespace EasyAndLazy
             //鼠标点击事件
             simpleButton1.MouseDown += Form1_MouseDown;
             simpleButton1.MouseMove += Form1_MouseMove;
-            simpleButton1.MouseUp += Form1_MouseUp;}
+            simpleButton1.MouseUp += Form1_MouseUp;
+        }
         
         #endregion
         #region 属性
@@ -68,6 +63,7 @@ namespace EasyAndLazy
         /// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
         {
+            Location = new Point(120, 100);
             var open = new OpenFileDialog{
                 Filter = @"Files (*.txt)|*.txt"
             };
@@ -166,7 +162,8 @@ namespace EasyAndLazy
         {
             HotKey.UnregisterHotKey(Handle, 100);//卸载第1个快捷键
             HotKey.UnregisterHotKey(Handle, 101); //缷载第2个快捷键
-            HotKey.UnregisterHotKey(Handle, 102); //缷载第2个快捷键
+            HotKey.UnregisterHotKey(Handle, 102); //缷载第3个快捷键
+            HotKey.UnregisterHotKey(Handle, 103); //缷载第4个快捷键
             //记录当前阅读行数
             ini.IniWriteValue(section, "ReadIndex", CurIndex.ToString().Trim());
             Close();
@@ -181,16 +178,28 @@ namespace EasyAndLazy
                 case WM_HOTKEY:
                     switch (m.WParam.ToInt32())
                     {
-                        case 100:    //按下的是ALTER+左键
+                        case 100:    //按下的是ALTER+J
+                            if(StoryText[CurIndex + 1] == null) break;
                             CurIndex++;
                             textEdit1.EditValue = StoryText[CurIndex];
                             break;
-                        case 101:    //按下的是ALTER+右键
-                            CurIndex--;
-                            textEdit1.EditValue = StoryText[CurIndex];
+                        case 101:    //按下的是ALTER+K
+                            if (CurIndex != 0)
+                            {
+                                CurIndex--;
+                                textEdit1.EditValue = StoryText[CurIndex];
+                            }
                             break;
-                        case 102:    //按下的是Alt+Delete
+                        case 102:    //按下的是Alt+Q
                             FormClose();
+                            break;
+                        case 103:    //按下的是Ctrl+F
+                            FormSearch form = new FormSearch();
+                            form.StoryText = StoryText.ToList();
+                            if (form.ShowDialog() == DialogResult.OK)
+                            {
+                                CurIndex = form.ChoosedIndex;
+                                textEdit1.EditValue = StoryText[CurIndex];}
                             break;
                     }
                     break;
