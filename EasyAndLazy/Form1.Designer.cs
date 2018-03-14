@@ -57,7 +57,7 @@
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(214, 275, 450, 400);
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(1291, 26);
+            this.layoutControl1.Size = new System.Drawing.Size(1491, 26);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -67,7 +67,7 @@
             this.textEdit1.Name = "textEdit1";
             this.textEdit1.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
             this.textEdit1.Properties.Appearance.Options.UseBackColor = true;
-            this.textEdit1.Size = new System.Drawing.Size(1257, 20);
+            this.textEdit1.Size = new System.Drawing.Size(1452, 20);
             this.textEdit1.StyleController = this.layoutControl1;
             this.textEdit1.TabIndex = 6;
             // 
@@ -77,9 +77,9 @@
             this.simpleButton1.Appearance.Options.UseBackColor = true;
             this.simpleButton1.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.Image")));
             this.simpleButton1.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.simpleButton1.Location = new System.Drawing.Point(1263, 2);
+            this.simpleButton1.Location = new System.Drawing.Point(1458, 2);
             this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(26, 22);
+            this.simpleButton1.Size = new System.Drawing.Size(31, 22);
             this.simpleButton1.StyleController = this.layoutControl1;
             this.simpleButton1.TabIndex = 5;
             this.simpleButton1.Text = "simpleButton1";
@@ -94,7 +94,7 @@
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup1.Size = new System.Drawing.Size(1291, 26);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(1491, 26);
             this.layoutControlGroup1.TextVisible = false;
             // 
             // layoutControlItem2
@@ -102,11 +102,11 @@
             this.layoutControlItem2.Control = this.simpleButton1;
             this.layoutControlItem2.Image = ((System.Drawing.Image)(resources.GetObject("layoutControlItem2.Image")));
             this.layoutControlItem2.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.layoutControlItem2.Location = new System.Drawing.Point(1261, 0);
-            this.layoutControlItem2.MaxSize = new System.Drawing.Size(30, 26);
-            this.layoutControlItem2.MinSize = new System.Drawing.Size(30, 26);
+            this.layoutControlItem2.Location = new System.Drawing.Point(1456, 0);
+            this.layoutControlItem2.MaxSize = new System.Drawing.Size(35, 26);
+            this.layoutControlItem2.MinSize = new System.Drawing.Size(35, 26);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(30, 26);
+            this.layoutControlItem2.Size = new System.Drawing.Size(35, 26);
             this.layoutControlItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
@@ -115,10 +115,10 @@
             // 
             this.layoutControlItem1.Control = this.textEdit1;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem1.MaxSize = new System.Drawing.Size(1261, 26);
-            this.layoutControlItem1.MinSize = new System.Drawing.Size(1261, 26);
+            this.layoutControlItem1.MaxSize = new System.Drawing.Size(1456, 26);
+            this.layoutControlItem1.MinSize = new System.Drawing.Size(1456, 26);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1261, 26);
+            this.layoutControlItem1.Size = new System.Drawing.Size(1456, 26);
             this.layoutControlItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
@@ -140,7 +140,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1291, 26);
+            this.ClientSize = new System.Drawing.Size(1491, 26);
             this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.layoutControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
