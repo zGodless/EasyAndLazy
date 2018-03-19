@@ -41,6 +41,8 @@
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.galleryDropDown1 = new DevExpress.XtraBars.Ribbon.GalleryDropDown(this.components);
+            this.lookUpEdit1 = new DevExpress.XtraEditors.LookUpEdit();
+            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).BeginInit();
@@ -52,6 +54,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.galleryDropDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -74,6 +78,7 @@
             // 
             // layoutControl2
             // 
+            this.layoutControl2.Controls.Add(this.lookUpEdit1);
             this.layoutControl2.Controls.Add(this.gcSearch);
             this.layoutControl2.Controls.Add(this.textSearch);
             this.layoutControl2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -90,7 +95,7 @@
             this.gcSearch.Location = new System.Drawing.Point(2, 26);
             this.gcSearch.MainView = this.gvSearch;
             this.gcSearch.Name = "gcSearch";
-            this.gcSearch.Size = new System.Drawing.Size(750, 272);
+            this.gcSearch.Size = new System.Drawing.Size(750, 248);
             this.gcSearch.TabIndex = 5;
             this.gcSearch.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvSearch});
@@ -149,7 +154,8 @@
             this.layoutControlGroup2.GroupBordersVisible = false;
             this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem1,
-            this.layoutControlItem2});
+            this.layoutControlItem2,
+            this.layoutControlItem4});
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup2.Name = "Root";
             this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
@@ -170,7 +176,7 @@
             this.layoutControlItem2.Control = this.gcSearch;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 24);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(754, 276);
+            this.layoutControlItem2.Size = new System.Drawing.Size(754, 252);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
@@ -178,6 +184,36 @@
             // 
             this.galleryDropDown1.Manager = null;
             this.galleryDropDown1.Name = "galleryDropDown1";
+            // 
+            // lookUpEdit1
+            // 
+            this.lookUpEdit1.Location = new System.Drawing.Point(2, 278);
+            this.lookUpEdit1.Name = "lookUpEdit1";
+            this.lookUpEdit1.Properties.AutoSearchColumnIndex = 1;
+            this.lookUpEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpEdit1.Properties.CaseSensitiveSearch = true;
+            this.lookUpEdit1.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "行号"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TextString", 220, "文本")});
+            this.lookUpEdit1.Properties.DisplayMember = "TextString";
+            this.lookUpEdit1.Properties.ImmediatePopup = true;
+            this.lookUpEdit1.Properties.NullText = "";
+            this.lookUpEdit1.Properties.PopupFilterMode = DevExpress.XtraEditors.PopupFilterMode.Contains;
+            this.lookUpEdit1.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
+            this.lookUpEdit1.Properties.ValueMember = "Index";
+            this.lookUpEdit1.Size = new System.Drawing.Size(750, 20);
+            this.lookUpEdit1.StyleController = this.layoutControl2;
+            this.lookUpEdit1.TabIndex = 7;
+            // 
+            // layoutControlItem4
+            // 
+            this.layoutControlItem4.Control = this.lookUpEdit1;
+            this.layoutControlItem4.Location = new System.Drawing.Point(0, 276);
+            this.layoutControlItem4.Name = "layoutControlItem4";
+            this.layoutControlItem4.Size = new System.Drawing.Size(754, 24);
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem4.TextVisible = false;
             // 
             // FormSearch
             // 
@@ -200,6 +236,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.galleryDropDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -218,5 +256,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraBars.Ribbon.GalleryDropDown galleryDropDown1;
+        private DevExpress.XtraEditors.LookUpEdit lookUpEdit1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
     }
 }

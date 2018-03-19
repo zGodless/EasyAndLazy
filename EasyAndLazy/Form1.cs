@@ -24,9 +24,18 @@ namespace EasyAndLazy
             HotKey.RegisterHotKey(Handle, 100, HotKey.KeyModifiers.Alt, Keys.J);
             HotKey.RegisterHotKey(Handle, 101, HotKey.KeyModifiers.Alt, Keys.K);
             HotKey.RegisterHotKey(Handle, 102, HotKey.KeyModifiers.Alt, Keys.Q);
-            HotKey.RegisterHotKey(Handle, 103, HotKey.KeyModifiers.Ctrl, Keys.F);
+            HotKey.RegisterHotKey(Handle, 103, HotKey.KeyModifiers.Alt, Keys.F);
+            HotKey.RegisterHotKey(Handle, 104, HotKey.KeyModifiers.Alt, Keys.H);
             //窗体置顶层
-            SetWindowPos(this.Handle, -1, 0, 0, 0, 0, 1 | 2);}
+            SetWindowPos(this.Handle, -1, 0, 0, 0, 0, 1 | 2);
+//             var control = textEdit1.Controls[0] as TextBox;
+//             control.Multiline = true;
+//             control.WordWrap = true;
+
+            textWide = textEdit1.Width - 5;
+        }
+
+
         public void InitEvent()
         {
             Load += Form1_Load;
@@ -51,6 +60,9 @@ namespace EasyAndLazy
         bool beginMove = false;//初始化鼠标位置  
         int currentXPosition;
         int currentYPosition;
+
+        //记录当前文本框宽度
+        private int textWide { get; set; }
         #endregion
 
 
@@ -154,7 +166,18 @@ namespace EasyAndLazy
             string line = "";
             for (int i = 1; (line = HoleReader.ReadLine()) != null; i++)
             {
-                StoryText[i] = line;
+                int j = 1;
+                if (line.Length > textWide)     //换行
+                {
+                    int len = line.Length;
+                    StoryText[i] = line;
+                    while (len - j * textWide > 0)
+                    {
+                        StoryText[i + j] = line.Substring(j * textWide, textWide);
+                        j++;
+                        i++;
+                    }
+                }
             }
         }
 
@@ -164,6 +187,7 @@ namespace EasyAndLazy
             HotKey.UnregisterHotKey(Handle, 101); //缷载第2个快捷键
             HotKey.UnregisterHotKey(Handle, 102); //缷载第3个快捷键
             HotKey.UnregisterHotKey(Handle, 103); //缷载第4个快捷键
+            HotKey.UnregisterHotKey(Handle, 104); //缷载第4个快捷键
             //记录当前阅读行数
             ini.IniWriteValue(section, "ReadIndex", CurIndex.ToString().Trim());
             Close();
@@ -193,7 +217,7 @@ namespace EasyAndLazy
                         case 102:    //按下的是Alt+Q
                             FormClose();
                             break;
-                        case 103:    //按下的是Ctrl+F
+                        case 103:    //按下的是Alt+F
                             FormSearch form = new FormSearch();
                             form.StoryText = StoryText.ToList();
                             if (form.ShowDialog() == DialogResult.OK)
@@ -201,10 +225,22 @@ namespace EasyAndLazy
                                 CurIndex = form.ChoosedIndex;
                                 textEdit1.EditValue = StoryText[CurIndex];}
                             break;
+                        case 104:    //按下的是Alt+H
+
+                            break;
                     }
                     break;
             }
             base.WndProc(ref m);
+        }
+
+        //计算当前文本框一行可以装多少个字
+        private int HowMuchWord()
+        {
+            Graphics graphics = CreateGraphics();
+
+            SizeF sizeF = graphics.MeasureString("文", new Font("宋体", 9));
+            float wordNum = textEdit1.Width / sizeF.Width;
         }
         #endregion
 

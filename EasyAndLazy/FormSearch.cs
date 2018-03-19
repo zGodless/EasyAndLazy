@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Repository;
 
 namespace EasyAndLazy
 {
@@ -21,9 +23,32 @@ namespace EasyAndLazy
         {
             Load += FormSearch_Load;
             Paint += FormSearch_Paint;
-            textSearch.EditValueChanged += TextSearch_EditValueChanged;
+            //textSearch.EditValueChanged += TextSearch_EditValueChanged;
             gvSearch.DoubleClick += GvSearch_DoubleClick;
             LostFocus += FormSearch_LostFocus;
+            textSearch.KeyUp += TextSearch_KeyUp;
+        }
+
+        private void TextSearch_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                SearchList = new List<DataModel>();
+                for (int i = 0; i < StoryText.Count; i++)
+                {
+                    if (StoryText[i] == null) continue;
+                    if (StoryText[i].Contains(textSearch.Text))
+                    {
+                        SearchList.Add(new DataModel
+                        {
+                            Index = i,
+                            TextString = StoryText[i]
+                        });
+                    }
+                }
+                gcSearch.DataSource = SearchList;
+                gcSearch.RefreshDataSource();
+            }
         }
 
         private void FormSearch_Paint(object sender, PaintEventArgs e)
@@ -66,7 +91,8 @@ namespace EasyAndLazy
         private void FormSearch_Load(object sender, EventArgs e)
         {
             Location = new Point(120, 140);
-            ActiveControl = textSearch;}
+            ActiveControl = textSearch;
+        }
 
         public List<string> StoryText { get; set; }   //放置当前文本
         private List<DataModel> SearchList { get; set; }   //放置搜索结果文本
