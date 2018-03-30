@@ -43,7 +43,6 @@ D:\Code\逐行显示器\EasyAndLazy\EasyAndLazy\bin\Debug\de\DevExpress.Sparklin
 D:\Code\逐行显示器\EasyAndLazy\EasyAndLazy\bin\Debug\es\DevExpress.Sparkline.v16.2.Core.resources.dll
 D:\Code\逐行显示器\EasyAndLazy\EasyAndLazy\bin\Debug\ja\DevExpress.Sparkline.v16.2.Core.resources.dll
 D:\Code\逐行显示器\EasyAndLazy\EasyAndLazy\bin\Debug\ru\DevExpress.Sparkline.v16.2.Core.resources.dll
-D:\Code\逐行显示器\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.csprojResolveAssemblyReference.cache
 D:\Code\逐行显示器\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.Form1.resources
 D:\Code\逐行显示器\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.Properties.Resources.resources
 D:\Code\逐行显示器\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.csproj.GenerateResource.Cache

@@ -75,7 +75,7 @@ namespace EasyAndLazy
         /// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
         {
-            Location = new Point(120, 100);
+            Location = new Point(150, 1015);
             var open = new OpenFileDialog{
                 Filter = @"Files (*.txt)|*.txt"
             };
@@ -196,7 +196,7 @@ namespace EasyAndLazy
         private void FormClose()
         {
             HotKey.UnregisterHotKey(Handle, 100);//卸载第1个快捷键
-            HotKey.UnregisterHotKey(Handle, 101); //卸载第2个快捷键
+            HotKey.UnregisterHotKey(Handle, 101); //卸载第2个快捷键 
             HotKey.UnregisterHotKey(Handle, 102); //卸载第3个快捷键
             HotKey.UnregisterHotKey(Handle, 103); //卸载第4个快捷键
             HotKey.UnregisterHotKey(Handle, 104); //卸载第4个快捷键

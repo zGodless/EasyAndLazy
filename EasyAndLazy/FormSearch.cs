@@ -23,7 +23,7 @@ namespace EasyAndLazy
         {
             Load += FormSearch_Load;
             Paint += FormSearch_Paint;
-            //textSearch.EditValueChanged += TextSearch_EditValueChanged;
+            textSearch.EditValueChanged += TextSearch_EditValueChanged;
             gvSearch.DoubleClick += GvSearch_DoubleClick;
             LostFocus += FormSearch_LostFocus;
             textSearch.KeyUp += TextSearch_KeyUp;
