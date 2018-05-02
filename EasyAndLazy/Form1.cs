@@ -152,7 +152,6 @@ namespace EasyAndLazy
             }
         }
         #endregion
-
         #region 方法
 
         /// <summary>
@@ -161,7 +160,7 @@ namespace EasyAndLazy
         /// <param name="filePath">加载路径</param>
         private void LoadText(string filePath)
         {
-            StoryText = new string[100000];
+            StoryText = new string[300000];
             HoleReader = new StreamReader(filePath, Encoding.UTF8);     //读取文本
             string line = "";
             for (int i = 1; (line = HoleReader.ReadLine()) != null; i++)
@@ -268,7 +267,7 @@ namespace EasyAndLazy
                 Keys vk                     //定义热键的内容
             );
 
-            [DllImport("user32.dll", SetLastError = true)]
+            [DllImport("user3jj2.dll", SetLastError = true)]
             public static extern bool UnregisterHotKey(
                 IntPtr hWnd,                //要取消热键的窗口的句柄
                 int id                      //要取消热键的ID

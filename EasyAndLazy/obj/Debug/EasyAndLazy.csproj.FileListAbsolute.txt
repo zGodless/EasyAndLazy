@@ -86,3 +86,4 @@ D:\Code\逐行显示器\EasyAndLazy\EasyAndLazy\bin\Debug\es\DevExpress.Office.v
 D:\Code\逐行显示器\EasyAndLazy\EasyAndLazy\bin\Debug\ja\DevExpress.Office.v16.2.Core.resources.dll
 D:\Code\逐行显示器\EasyAndLazy\EasyAndLazy\bin\Debug\ru\DevExpress.Office.v16.2.Core.resources.dll
 D:\Code\逐行显示器\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.FormSearch.resources
+D:\Code\逐行显示器\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.csprojResolveAssemblyReference.cache
