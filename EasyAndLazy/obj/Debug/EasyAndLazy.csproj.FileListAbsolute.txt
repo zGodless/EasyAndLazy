@@ -98,3 +98,14 @@ D:\EasyAndLazy\EasyAndLazy-master\EasyAndLazy\obj\Debug\EasyAndLazy.Properties.R
 D:\EasyAndLazy\EasyAndLazy-master\EasyAndLazy\obj\Debug\EasyAndLazy.csproj.GenerateResource.Cache
 D:\EasyAndLazy\EasyAndLazy-master\EasyAndLazy\obj\Debug\EasyAndLazy.exe.licenses
 D:\EasyAndLazy\EasyAndLazy-master\EasyAndLazy\obj\Debug\EasyAndLazy.csprojResolveAssemblyReference.cache
+D:\EasyAndLazy\Code\EasyAndLazy\EasyAndLazy\bin\Debug\EasyAndLazy.exe.config
+D:\EasyAndLazy\Code\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.exe
+D:\EasyAndLazy\Code\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.pdb
+D:\EasyAndLazy\Code\EasyAndLazy\EasyAndLazy\bin\Debug\EasyAndLazy.exe
+D:\EasyAndLazy\Code\EasyAndLazy\EasyAndLazy\bin\Debug\EasyAndLazy.pdb
+D:\EasyAndLazy\Code\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.csprojResolveAssemblyReference.cache
+D:\EasyAndLazy\Code\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.Form1.resources
+D:\EasyAndLazy\Code\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.FormSearch.resources
+D:\EasyAndLazy\Code\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.Properties.Resources.resources
+D:\EasyAndLazy\Code\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.csproj.GenerateResource.Cache
+D:\EasyAndLazy\Code\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.exe.licenses

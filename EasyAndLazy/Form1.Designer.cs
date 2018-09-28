@@ -65,6 +65,9 @@
             // 
             this.textEdit1.Location = new System.Drawing.Point(2, 2);
             this.textEdit1.Name = "textEdit1";
+            // 
+            // 
+            // 
             this.textEdit1.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
             this.textEdit1.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit1.Size = new System.Drawing.Size(1452, 20);
@@ -145,7 +148,7 @@
             this.Controls.Add(this.layoutControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
-            this.Opacity = 0.35D;
+            this.Opacity = 0.2D;
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
@@ -167,7 +170,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem btnClose;
-        public DevExpress.XtraEditors.TextEdit textEdit1;
+        private DevExpress.XtraEditors.TextEdit textEdit1;
     }
 }
 

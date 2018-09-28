@@ -24,8 +24,11 @@ namespace EasyAndLazy
             HotKey.RegisterHotKey(Handle, 100, HotKey.KeyModifiers.Alt, Keys.J);
             HotKey.RegisterHotKey(Handle, 101, HotKey.KeyModifiers.Alt, Keys.K);
             HotKey.RegisterHotKey(Handle, 102, HotKey.KeyModifiers.Alt, Keys.Q);
+            HotKey.RegisterHotKey(Handle, 1021, HotKey.KeyModifiers.Alt, Keys.O);
             HotKey.RegisterHotKey(Handle, 103, HotKey.KeyModifiers.Alt, Keys.F);
             HotKey.RegisterHotKey(Handle, 104, HotKey.KeyModifiers.Alt, Keys.H);
+            HotKey.RegisterHotKey(Handle, 105, HotKey.KeyModifiers.Alt, Keys.Up);
+            HotKey.RegisterHotKey(Handle, 106, HotKey.KeyModifiers.Alt, Keys.Down);
             //窗体置顶层
             SetWindowPos(this.Handle, -1, 0, 0, 0, 0, 1 | 2);
 //             var control = textEdit1.Controls[0] as TextBox;
@@ -76,7 +79,8 @@ namespace EasyAndLazy
         private void Form1_Load(object sender, EventArgs e)
         {
             Location = new Point(150, 1015);
-            var open = new OpenFileDialog{
+            var open = new OpenFileDialog
+            {
                 Filter = @"Files (*.txt)|*.txt"
             };
             if (open.ShowDialog() == DialogResult.OK)   //选择文件并加载文本到内存
@@ -86,7 +90,7 @@ namespace EasyAndLazy
             else
             {
                 MessageBox.Show("打开失败");
-                return;
+                Close();
             }
             string inipath = Application.StartupPath + @"\indexConfig.ini";     //读取配置文件获取上次阅读行
             ini = new INIClass(inipath);
@@ -98,17 +102,22 @@ namespace EasyAndLazy
                 filest.Close();
                 ini.IniWriteValue(section, "Path", open.FileName);
                 ini.IniWriteValue(section, "ReadIndex", "1");
+                ini.IniWriteValue(section, "Opacity", "0.4");
             }
             if (string.IsNullOrEmpty(ini.IniReadValue(section, "ReadIndex")))
             {
-                ini.IniWriteValue(section, "Path", open.FileName);
                 ini.IniWriteValue(section, "ReadIndex", "1");
+            }
+            if (string.IsNullOrEmpty(ini.IniReadValue(section, "Opacity")))
+            {
+                ini.IniWriteValue(section, "Opacity", "0.4");
             }
             CurIndex = Convert.ToInt32(ini.IniReadValue(section, "ReadIndex"));     //获取上次阅读行数
             if (CurIndex != 0)
             {
                 textEdit1.EditValue = StoryText[CurIndex];
             }
+            Opacity = Convert.ToDouble(ini.IniReadValue(section, "Opacity"));     //获取上次透明度
         }
 
         /// <summary>
@@ -135,6 +144,7 @@ namespace EasyAndLazy
         {
             if (beginMove)
             {
+                Console.WriteLine(MousePosition.X.ToString() + "; "+ MousePosition.Y.ToString() + "; " + currentXPosition.ToString() + "; " + currentYPosition);
                 this.Left += MousePosition.X - currentXPosition;//根据鼠标x坐标确定窗体的左边坐标x  
                 this.Top += MousePosition.Y - currentYPosition;//根据鼠标的y坐标窗体的顶部，即Y坐标  
                 currentXPosition = MousePosition.X;
@@ -153,8 +163,8 @@ namespace EasyAndLazy
         }
         #endregion
         #region 方法
-
         /// <summary>
+
         /// 加载文本
         /// </summary>
         /// <param name="filePath">加载路径</param>
@@ -202,10 +212,15 @@ namespace EasyAndLazy
             HotKey.UnregisterHotKey(Handle, 100);//卸载第1个快捷键
             HotKey.UnregisterHotKey(Handle, 101); //卸载第2个快捷键 
             HotKey.UnregisterHotKey(Handle, 102); //卸载第3个快捷键
+            HotKey.UnregisterHotKey(Handle, 1021); //卸载第3个快捷键
             HotKey.UnregisterHotKey(Handle, 103); //卸载第4个快捷键
             HotKey.UnregisterHotKey(Handle, 104); //卸载第4个快捷键
+            HotKey.UnregisterHotKey(Handle, 105); //卸载第4个快捷键
+            HotKey.UnregisterHotKey(Handle, 106); //卸载第4个快捷键
             //记录当前阅读行数
             ini.IniWriteValue(section, "ReadIndex", CurIndex.ToString().Trim());
+            //记录当前透明度
+            ini.IniWriteValue(section, "Opacity", Opacity.ToString());
             Close();
         }
         //重写WndProc()方法，通过监视系统消息，来调用过程
@@ -230,6 +245,7 @@ namespace EasyAndLazy
                             }
                             break;
                         case 102:    //按下的是Alt+Q
+                        case 1021:      //Alt+O
                             FormClose();
                             break;
                         case 103:    //按下的是Alt+F
@@ -238,10 +254,24 @@ namespace EasyAndLazy
                             if (form.ShowDialog() == DialogResult.OK)
                             {
                                 CurIndex = form.ChoosedIndex;
-                                textEdit1.EditValue = StoryText[CurIndex];}
+                                textEdit1.EditValue = StoryText[CurIndex];
+
+                            }
                             break;
                         case 104:    //按下的是Alt+H
 
+                            break;
+                        case 105:
+                            if (Opacity < 0.9f)
+                            {
+                                Opacity += 0.1;
+                            }
+                            break;
+                        case 106:
+                            if (Opacity > 0.1f)
+                            {
+                                Opacity -= 0.1;
+                            }
                             break;
                     }
                     break;
