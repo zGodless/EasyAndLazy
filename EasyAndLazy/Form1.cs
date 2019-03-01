@@ -23,6 +23,7 @@ namespace EasyAndLazy
             //注册热键
             HotKey.RegisterHotKey(Handle, 100, HotKey.KeyModifiers.Alt, Keys.J);
             HotKey.RegisterHotKey(Handle, 101, HotKey.KeyModifiers.Alt, Keys.K);
+            HotKey.RegisterHotKey(Handle, 1012, HotKey.KeyModifiers.Alt, Keys.I);
             HotKey.RegisterHotKey(Handle, 102, HotKey.KeyModifiers.Alt, Keys.Q);
             HotKey.RegisterHotKey(Handle, 1021, HotKey.KeyModifiers.Alt, Keys.O);
             HotKey.RegisterHotKey(Handle, 103, HotKey.KeyModifiers.Alt, Keys.F);
@@ -36,13 +37,13 @@ namespace EasyAndLazy
 //             control.WordWrap = true;
 
             textWide = HowMuchWord() - 5;
+            
         }
 
 
         public void InitEvent()
         {
             Load += Form1_Load;
-            btnClose.Click += BtnClose_Click;
 
             //鼠标点击事件
             simpleButton1.MouseDown += Form1_MouseDown;
@@ -78,7 +79,7 @@ namespace EasyAndLazy
         /// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
         {
-            Location = new Point(150, 1015);
+            Location = new Point(50, 1020);
             var open = new OpenFileDialog
             {
                 Filter = @"Files (*.txt)|*.txt"
@@ -86,11 +87,12 @@ namespace EasyAndLazy
             if (open.ShowDialog() == DialogResult.OK)   //选择文件并加载文本到内存
             {
                 LoadText(open.FileName);
+                WindowState = FormWindowState.Normal;
             }
             else
             {
                 MessageBox.Show("打开失败");
-                Close();
+                Environment.Exit(0);
             }
             string inipath = Application.StartupPath + @"\indexConfig.ini";     //读取配置文件获取上次阅读行
             ini = new INIClass(inipath);
@@ -115,7 +117,7 @@ namespace EasyAndLazy
             CurIndex = Convert.ToInt32(ini.IniReadValue(section, "ReadIndex"));     //获取上次阅读行数
             if (CurIndex != 0)
             {
-                textEdit1.EditValue = StoryText[CurIndex];
+                textEdit1.Text = StoryText[CurIndex];
             }
             Opacity = Convert.ToDouble(ini.IniReadValue(section, "Opacity"));     //获取上次透明度
         }
@@ -152,7 +154,7 @@ namespace EasyAndLazy
             }
         }
 
-        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        private void Form1_MouseDown(object sender, MouseEventArgs e )
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -171,7 +173,8 @@ namespace EasyAndLazy
         private void LoadText(string filePath)
         {
             StoryText = new string[300000];
-            HoleReader = new StreamReader(filePath, Encoding.UTF8);     //读取文本
+            Encoding ed = EncodingType.GetType(filePath);
+            HoleReader = new StreamReader(filePath, ed);     //读取文本
             string line = "";
             for (int i = 1; (line = HoleReader.ReadLine()) != null; i++)
             {
@@ -210,7 +213,8 @@ namespace EasyAndLazy
         private void FormClose()
         {
             HotKey.UnregisterHotKey(Handle, 100);//卸载第1个快捷键
-            HotKey.UnregisterHotKey(Handle, 101); //卸载第2个快捷键 
+            HotKey.UnregisterHotKey(Handle, 101); //卸载第2个快捷键
+            HotKey.UnregisterHotKey(Handle, 1012); //卸载第2个快捷键  
             HotKey.UnregisterHotKey(Handle, 102); //卸载第3个快捷键
             HotKey.UnregisterHotKey(Handle, 1021); //卸载第3个快捷键
             HotKey.UnregisterHotKey(Handle, 103); //卸载第4个快捷键
@@ -235,13 +239,14 @@ namespace EasyAndLazy
                         case 100:    //按下的是ALTER+J
                             //if(StoryText[CurIndex + 1] == null) break;
                             CurIndex++;
-                            textEdit1.EditValue = StoryText[CurIndex];
+                            textEdit1.Text = StoryText[CurIndex];
                             break;
                         case 101:    //按下的是ALTER+K
+                        case 1012:    //按下的是ALTER+I
                             if (CurIndex != 0)
                             {
                                 CurIndex--;
-                                textEdit1.EditValue = StoryText[CurIndex];
+                                textEdit1.Text = StoryText[CurIndex];
                             }
                             break;
                         case 102:    //按下的是Alt+Q
@@ -254,7 +259,7 @@ namespace EasyAndLazy
                             if (form.ShowDialog() == DialogResult.OK)
                             {
                                 CurIndex = form.ChoosedIndex;
-                                textEdit1.EditValue = StoryText[CurIndex];
+                                textEdit1.Text = StoryText[CurIndex];
 
                             }
                             break;
@@ -264,13 +269,13 @@ namespace EasyAndLazy
                         case 105:
                             if (Opacity < 0.9f)
                             {
-                                Opacity += 0.1;
+                                Opacity += 0.01;
                             }
                             break;
                         case 106:
                             if (Opacity > 0.1f)
                             {
-                                Opacity -= 0.1;
+                                Opacity -= 0.01;
                             }
                             break;
                     }
@@ -289,7 +294,7 @@ namespace EasyAndLazy
             return Convert.ToInt32(wordNum);
         }
         #endregion
-
+        
         class HotKey
         {
             //如果函数执行成功，返回值不为0。
