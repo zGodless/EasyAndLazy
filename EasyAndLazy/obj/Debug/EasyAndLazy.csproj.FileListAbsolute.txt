@@ -178,3 +178,14 @@ D:\EasyAndLazy\Code\EasyAndLazy\EasyAndLazy\bin\Debug\de\DevExpress.Office.v16.2
 D:\EasyAndLazy\Code\EasyAndLazy\EasyAndLazy\bin\Debug\es\DevExpress.Office.v16.2.Core.resources.dll
 D:\EasyAndLazy\Code\EasyAndLazy\EasyAndLazy\bin\Debug\ja\DevExpress.Office.v16.2.Core.resources.dll
 D:\EasyAndLazy\Code\EasyAndLazy\EasyAndLazy\bin\Debug\ru\DevExpress.Office.v16.2.Core.resources.dll
+F:\张永亮\Github\EasyAndLazy\EasyAndLazy\bin\Debug\EasyAndLazy.exe.config
+F:\张永亮\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.exe
+F:\张永亮\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.pdb
+F:\张永亮\Github\EasyAndLazy\EasyAndLazy\bin\Debug\EasyAndLazy.exe
+F:\张永亮\Github\EasyAndLazy\EasyAndLazy\bin\Debug\EasyAndLazy.pdb
+F:\张永亮\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.Form1.resources
+F:\张永亮\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.FormSearch.resources
+F:\张永亮\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.Properties.Resources.resources
+F:\张永亮\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.csproj.GenerateResource.Cache
+F:\张永亮\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.exe.licenses
+F:\张永亮\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.csprojResolveAssemblyReference.cache

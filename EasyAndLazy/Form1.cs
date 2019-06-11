@@ -22,8 +22,12 @@ namespace EasyAndLazy
         {
             //注册热键
             HotKey.RegisterHotKey(Handle, 100, HotKey.KeyModifiers.Alt, Keys.J);
+            HotKey.RegisterHotKey(Handle, 1001, HotKey.KeyModifiers.Alt, Keys.D);
+            HotKey.RegisterHotKey(Handle, 1002, HotKey.KeyModifiers.Ctrl, Keys.J);
             HotKey.RegisterHotKey(Handle, 101, HotKey.KeyModifiers.Alt, Keys.K);
+            HotKey.RegisterHotKey(Handle, 1011, HotKey.KeyModifiers.Ctrl, Keys.I);
             HotKey.RegisterHotKey(Handle, 1012, HotKey.KeyModifiers.Alt, Keys.I);
+            HotKey.RegisterHotKey(Handle, 1013, HotKey.KeyModifiers.Alt, Keys.S);
             HotKey.RegisterHotKey(Handle, 102, HotKey.KeyModifiers.Alt, Keys.Q);
             HotKey.RegisterHotKey(Handle, 1021, HotKey.KeyModifiers.Alt, Keys.O);
             HotKey.RegisterHotKey(Handle, 103, HotKey.KeyModifiers.Alt, Keys.F);
@@ -213,8 +217,12 @@ namespace EasyAndLazy
         private void FormClose()
         {
             HotKey.UnregisterHotKey(Handle, 100);//卸载第1个快捷键
+            HotKey.UnregisterHotKey(Handle, 1001);//卸载第1个快捷键
+            HotKey.UnregisterHotKey(Handle, 1002);//卸载第1个快捷键
             HotKey.UnregisterHotKey(Handle, 101); //卸载第2个快捷键
-            HotKey.UnregisterHotKey(Handle, 1012); //卸载第2个快捷键  
+            HotKey.UnregisterHotKey(Handle, 1011); //卸载第2个快捷键
+            HotKey.UnregisterHotKey(Handle, 1012); //卸载第2个快捷键 
+            HotKey.UnregisterHotKey(Handle, 1013); //卸载第3个快捷键 
             HotKey.UnregisterHotKey(Handle, 102); //卸载第3个快捷键
             HotKey.UnregisterHotKey(Handle, 1021); //卸载第3个快捷键
             HotKey.UnregisterHotKey(Handle, 103); //卸载第4个快捷键
@@ -237,12 +245,15 @@ namespace EasyAndLazy
                 case WM_HOTKEY:
                     switch (m.WParam.ToInt32()){
                         case 100:    //按下的是ALTER+J
-                            //if(StoryText[CurIndex + 1] == null) break;
+                        case 1001:    //按下的是ALTER+D
+                        case 1002:    //按下的是Ctrl+J
                             CurIndex++;
                             textEdit1.Text = StoryText[CurIndex];
                             break;
                         case 101:    //按下的是ALTER+K
                         case 1012:    //按下的是ALTER+I
+                        case 1013:      //Alt+S
+                        case 1011:      //Ctrl+I
                             if (CurIndex != 0)
                             {
                                 CurIndex--;
