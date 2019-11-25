@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -20,25 +22,38 @@ namespace EasyAndLazy
         #region 初始化
         public void Init()
         {
+            if (keyList == null)
+            {
+                keyList = new List<MyKey>();
+            }
+
+            keyList.AddRange(new []
+            {
+                //上一页
+                new MyKey{ id = 101,  keyA = HotKey.KeyModifiers.Ctrl, keyB = Keys.K, op = operateMode.prePage},
+                new MyKey{ id = 1011, keyA = HotKey.KeyModifiers.Ctrl, keyB = Keys.I, op = operateMode.prePage },
+                new MyKey{ id = 1012, keyA = HotKey.KeyModifiers.Alt, keyB = Keys.I, op = operateMode.prePage },
+                new MyKey{ id = 1013, keyA = HotKey.KeyModifiers.Alt, keyB = Keys.S, op = operateMode.prePage },
+                //下一页
+                new MyKey{ id = 100,  keyA = HotKey.KeyModifiers.Alt, keyB = Keys.J, op = operateMode.nextPage },
+                new MyKey{ id = 1001, keyA = HotKey.KeyModifiers.Alt, keyB = Keys.D, op = operateMode.nextPage },
+                new MyKey{ id = 1002, keyA = HotKey.KeyModifiers.Ctrl, keyB = Keys.J, op = operateMode.nextPage },
+                new MyKey{ id = 1003, keyB = Keys.MButton, op = operateMode.nextPage },
+                //关闭
+                new MyKey{ id = 102,  keyA = HotKey.KeyModifiers.Alt, keyB = Keys.Q, op = operateMode.close },
+                new MyKey{ id = 1021, keyA = HotKey.KeyModifiers.Alt, keyB = Keys.O, op = operateMode.close },
+                new MyKey{ id = 1022, keyA = HotKey.KeyModifiers.Ctrl, keyB = Keys.O, op = operateMode.close },
+                //搜索
+                new MyKey{ id = 103,  keyA = HotKey.KeyModifiers.Alt, keyB = Keys.F, op = operateMode.search },
+                //透明度
+                new MyKey{ id = 105,  keyA = HotKey.KeyModifiers.Alt, keyB = Keys.Up, op = operateMode.addOpacity },
+                new MyKey{ id = 106,  keyA = HotKey.KeyModifiers.Alt, keyB = Keys.Down, op = operateMode.reduceOpacity }
+            });
             //注册热键
-            HotKey.RegisterHotKey(Handle, 100, HotKey.KeyModifiers.Alt, Keys.J);
-            HotKey.RegisterHotKey(Handle, 1001, HotKey.KeyModifiers.Alt, Keys.D);
-            HotKey.RegisterHotKey(Handle, 1002, HotKey.KeyModifiers.Ctrl, Keys.J);
-            HotKey.RegisterHotKey(Handle, 101, HotKey.KeyModifiers.Alt, Keys.K);
-            HotKey.RegisterHotKey(Handle, 1011, HotKey.KeyModifiers.Ctrl, Keys.I);
-            HotKey.RegisterHotKey(Handle, 1012, HotKey.KeyModifiers.Alt, Keys.I);
-            HotKey.RegisterHotKey(Handle, 1013, HotKey.KeyModifiers.Alt, Keys.S);
-            HotKey.RegisterHotKey(Handle, 102, HotKey.KeyModifiers.Alt, Keys.Q);
-            HotKey.RegisterHotKey(Handle, 1021, HotKey.KeyModifiers.Alt, Keys.O);
-            HotKey.RegisterHotKey(Handle, 103, HotKey.KeyModifiers.Alt, Keys.F);
-            HotKey.RegisterHotKey(Handle, 104, HotKey.KeyModifiers.Alt, Keys.H);
-            HotKey.RegisterHotKey(Handle, 105, HotKey.KeyModifiers.Alt, Keys.Up);
-            HotKey.RegisterHotKey(Handle, 106, HotKey.KeyModifiers.Alt, Keys.Down);
+            keyList.ForEach(m => HotKey.RegisterHotKey(Handle, m.id, m.keyA, m.keyB));
+
             //窗体置顶层
             SetWindowPos(this.Handle, -1, 0, 0, 0, 0, 1 | 2);
-//             var control = textEdit1.Controls[0] as TextBox;
-//             control.Multiline = true;
-//             control.WordWrap = true;
 
             textWide = HowMuchWord() - 5;
             
@@ -71,8 +86,13 @@ namespace EasyAndLazy
 
         //记录当前文本框宽度
         private int textWide { get; set; }
-        #endregion
 
+        //热键集合
+        List<MyKey> keyList = new List<MyKey>();
+
+        //搜索窗体
+        public FormSearch form1;
+        #endregion
 
         #region 事件
 
@@ -124,16 +144,6 @@ namespace EasyAndLazy
                 textEdit1.Text = StoryText[CurIndex];
             }
             Opacity = Convert.ToDouble(ini.IniReadValue(section, "Opacity"));     //获取上次透明度
-        }
-
-        /// <summary>
-        /// 关闭
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void BtnClose_Click(object sender, EventArgs e)
-        {
-            FormClose();
         }
 
         private void Form1_MouseUp(object sender, MouseEventArgs e)
@@ -216,19 +226,9 @@ namespace EasyAndLazy
 
         private void FormClose()
         {
-            HotKey.UnregisterHotKey(Handle, 100);//卸载第1个快捷键
-            HotKey.UnregisterHotKey(Handle, 1001);//卸载第1个快捷键
-            HotKey.UnregisterHotKey(Handle, 1002);//卸载第1个快捷键
-            HotKey.UnregisterHotKey(Handle, 101); //卸载第2个快捷键
-            HotKey.UnregisterHotKey(Handle, 1011); //卸载第2个快捷键
-            HotKey.UnregisterHotKey(Handle, 1012); //卸载第2个快捷键 
-            HotKey.UnregisterHotKey(Handle, 1013); //卸载第3个快捷键 
-            HotKey.UnregisterHotKey(Handle, 102); //卸载第3个快捷键
-            HotKey.UnregisterHotKey(Handle, 1021); //卸载第3个快捷键
-            HotKey.UnregisterHotKey(Handle, 103); //卸载第4个快捷键
-            HotKey.UnregisterHotKey(Handle, 104); //卸载第4个快捷键
-            HotKey.UnregisterHotKey(Handle, 105); //卸载第4个快捷键
-            HotKey.UnregisterHotKey(Handle, 106); //卸载第4个快捷键
+            //卸载快捷键
+            keyList.ForEach(m => HotKey.UnregisterHotKey(Handle, m.id));
+
             //记录当前阅读行数
             ini.IniWriteValue(section, "ReadIndex", CurIndex.ToString().Trim());
             //记录当前透明度
@@ -243,47 +243,54 @@ namespace EasyAndLazy
             switch (m.Msg)
             {
                 case WM_HOTKEY:
-                    switch (m.WParam.ToInt32()){
-                        case 100:    //按下的是ALTER+J
-                        case 1001:    //按下的是ALTER+D
-                        case 1002:    //按下的是Ctrl+J
+                    int id = m.WParam.ToInt32();
+                    operateMode op = keyList.Find(k => k.id == id) == null ? operateMode.notExist : keyList.Find(k => k.id == id).op;
+                    switch (op)
+                    {
+                        case operateMode.notExist: break;
+                        //上一页
+                        case operateMode.prePage:
                             CurIndex++;
                             textEdit1.Text = StoryText[CurIndex];
                             break;
-                        case 101:    //按下的是ALTER+K
-                        case 1012:    //按下的是ALTER+I
-                        case 1013:      //Alt+S
-                        case 1011:      //Ctrl+I
+                        //下一页
+                        case operateMode.nextPage:
                             if (CurIndex != 0)
                             {
                                 CurIndex--;
                                 textEdit1.Text = StoryText[CurIndex];
                             }
                             break;
-                        case 102:    //按下的是Alt+Q
-                        case 1021:      //Alt+O
+                        //关闭
+                        case operateMode.close:
                             FormClose();
                             break;
-                        case 103:    //按下的是Alt+F
-                            FormSearch form = new FormSearch();
-                            form.StoryText = StoryText.ToList();
-                            if (form.ShowDialog() == DialogResult.OK)
+                        //搜索
+                        case operateMode.search:
+                            if (form1 == null || form1.IsDisposed)
                             {
-                                CurIndex = form.ChoosedIndex;
-                                textEdit1.Text = StoryText[CurIndex];
-
+                                form1 = new FormSearch();
+                                form1.StoryText = StoryText.ToList();
+                                if (form1.ShowDialog() == DialogResult.OK)
+                                {
+                                    CurIndex = form1.ChoosedIndex;
+                                    textEdit1.Text = StoryText[CurIndex];
+                                }
+                            }
+                            else
+                            {
+                                form1.Close();//已打开，关闭
                             }
                             break;
-                        case 104:    //按下的是Alt+H
-
-                            break;
-                        case 105:
+                        //减透明度
+                        case operateMode.reduceOpacity:
                             if (Opacity < 0.9f)
                             {
                                 Opacity += 0.01;
                             }
                             break;
-                        case 106:
+                        //加透明度
+                        case operateMode.addOpacity:
                             if (Opacity > 0.1f)
                             {
                                 Opacity -= 0.01;
@@ -310,7 +317,7 @@ namespace EasyAndLazy
         {
             //如果函数执行成功，返回值不为0。
             //如果函数执行失败，返回值为0。要得到扩展错误信息，调用GetLastError。
-            [DllImport("user32.dll", SetLastError = true)]
+            [DllImport("user32.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
             public static extern bool RegisterHotKey(
                 IntPtr hWnd,                //要定义热键的窗口的句柄
                 int id,                     //定义热键ID（不能与其它ID重复）           
@@ -318,7 +325,7 @@ namespace EasyAndLazy
                 Keys vk                     //定义热键的内容
             );
 
-            [DllImport("user32.dll", SetLastError = true)]
+            [DllImport("user32.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
             public static extern bool UnregisterHotKey(
                 IntPtr hWnd,                //要取消热键的窗口的句柄
                 int id                      //要取消热键的ID
@@ -336,19 +343,42 @@ namespace EasyAndLazy
             }
         }
 
+        class MyKey
+        {
+            public int id { get; set; }
+            public HotKey.KeyModifiers keyA { get; set; }
+            public Keys keyB { get; set; }
+            public operateMode op { get; set; }
+            public MyKey()
+            {
+
+            }
+        }
+
+        /// <summary>
+        /// 操作模式枚举
+        /// </summary>
+        enum operateMode
+        {
+            [Description("上一页")]
+            notExist = -1,
+            [Description("上一页")]
+            prePage = 1,
+            [Description("下一页")]
+            nextPage = 2,
+            [Description("关闭")]
+            close = 3,
+            [Description("搜索")]
+            search = 4,
+            [Description("减透明度")]
+            reduceOpacity = 5,
+            [Description("加透明度")]
+            addOpacity = 6
+
+        }
+
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern int SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int y, int Width, int Height, int flags);
-        /// <summary>
-        /// 得到当前活动的窗口
-        /// </summary>
-        /// <returns></returns>
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        private static extern System.IntPtr GetForegroundWindow();
-
-        [DllImport("user32.dll")]
-        public static extern bool ReleaseCapture();
-        [DllImport("user32.dll")]
-        public static extern bool SendMessage(IntPtr hwnd, int wMsg, int wParam, int lParam);
 
     }
 }
