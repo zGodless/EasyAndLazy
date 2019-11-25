@@ -190,3 +190,4 @@ F:\张永亮\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.csproj.Generat
 F:\张永亮\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.exe.licenses
 F:\张永亮\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.csproj.CoreCompileInputs.cache
 F:\张永亮\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.csproj.CopyComplete
+F:\张永亮\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.csprojAssemblyReference.cache

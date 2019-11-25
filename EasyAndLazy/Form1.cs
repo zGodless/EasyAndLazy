@@ -38,7 +38,7 @@ namespace EasyAndLazy
                 new MyKey{ id = 100,  keyA = HotKey.KeyModifiers.Alt, keyB = Keys.J, op = operateMode.nextPage },
                 new MyKey{ id = 1001, keyA = HotKey.KeyModifiers.Alt, keyB = Keys.D, op = operateMode.nextPage },
                 new MyKey{ id = 1002, keyA = HotKey.KeyModifiers.Ctrl, keyB = Keys.J, op = operateMode.nextPage },
-                new MyKey{ id = 1003, keyB = Keys.MButton, op = operateMode.nextPage },
+                new MyKey{ id = 1003, keyA = HotKey.KeyModifiers.None, keyB = Keys.MButton, op = operateMode.nextPage },
                 //关闭
                 new MyKey{ id = 102,  keyA = HotKey.KeyModifiers.Alt, keyB = Keys.Q, op = operateMode.close },
                 new MyKey{ id = 1021, keyA = HotKey.KeyModifiers.Alt, keyB = Keys.O, op = operateMode.close },
@@ -47,7 +47,13 @@ namespace EasyAndLazy
                 new MyKey{ id = 103,  keyA = HotKey.KeyModifiers.Alt, keyB = Keys.F, op = operateMode.search },
                 //透明度
                 new MyKey{ id = 105,  keyA = HotKey.KeyModifiers.Alt, keyB = Keys.Up, op = operateMode.addOpacity },
-                new MyKey{ id = 106,  keyA = HotKey.KeyModifiers.Alt, keyB = Keys.Down, op = operateMode.reduceOpacity }
+                new MyKey{ id = 106,  keyA = HotKey.KeyModifiers.Alt, keyB = Keys.Down, op = operateMode.reduceOpacity },
+                //窗体移动
+                new MyKey{ id = 1071,  keyA = HotKey.KeyModifiers.Ctrl, keyB = Keys.Up, op = operateMode.formUp },
+                new MyKey{ id = 1072, keyA = HotKey.KeyModifiers.Ctrl, keyB = Keys.Down, op = operateMode.formDown },
+                new MyKey{ id = 1073, keyA = HotKey.KeyModifiers.Ctrl, keyB = Keys.Left, op = operateMode.formLeft },
+                new MyKey{ id = 1074, keyA = HotKey.KeyModifiers.Ctrl, keyB = Keys.Right, op = operateMode.formRight }
+
             });
             //注册热键
             keyList.ForEach(m => HotKey.RegisterHotKey(Handle, m.id, m.keyA, m.keyB));
@@ -239,10 +245,12 @@ namespace EasyAndLazy
         protected override void WndProc(ref Message m)//监视Windows消息
         {
             const int WM_HOTKEY = 0x0312;
+            const int WM_MBUTTONDOWN = 0x0207;
             //按快捷键 
             switch (m.Msg)
             {
                 case WM_HOTKEY:
+                    RECT currentRect = new RECT();
                     int id = m.WParam.ToInt32();
                     operateMode op = keyList.Find(k => k.id == id) == null ? operateMode.notExist : keyList.Find(k => k.id == id).op;
                     switch (op)
@@ -297,8 +305,37 @@ namespace EasyAndLazy
                                 Opacity -= 0.01;
                             }
                             break;
+                        //窗体移动
+                        case operateMode.formUp:
+                            GetWindowRect(Handle, ref currentRect);
+                            Top--;
+                            break;
+                        case operateMode.formDown:
+                            currentRect = new RECT();
+                            GetWindowRect(Handle, ref currentRect);
+                            Top++;
+                            break;
+                        case operateMode.formLeft:
+                            currentRect = new RECT();
+                            GetWindowRect(Handle, ref currentRect);
+                            Left--;
+                            break;
+                        case operateMode.formRight:
+                            currentRect = new RECT();
+                            GetWindowRect(Handle, ref currentRect);
+                            Left++;
+                            break;
+
                     }
                     break;
+                case WM_MBUTTONDOWN:
+                    if (CurIndex != 0)
+                    {
+                        CurIndex--;
+                        textEdit1.Text = StoryText[CurIndex];
+                    }
+                    break;
+
             }
             base.WndProc(ref m);
         }
@@ -374,12 +411,33 @@ namespace EasyAndLazy
             [Description("减透明度")]
             reduceOpacity = 5,
             [Description("加透明度")]
-            addOpacity = 6
+            addOpacity = 6,
+            [Description("窗体拖动：上")]
+            formUp = 7,
+            [Description("窗体拖动：下")]
+            formDown = 8,
+            [Description("窗体拖动：左")]
+            formLeft = 9,
+            [Description("窗体拖动：右")]
+            formRight = 10
 
         }
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern int SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int y, int Width, int Height, int flags);
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool GetWindowRect(IntPtr hWnd, ref RECT lpRect);
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct RECT
+        {
+            public int Left; //最左坐标
+            public int Top; //最上坐标
+            public int Right; //最右坐标
+            public int Bottom; //最下坐标
+        }
 
     }
 }
