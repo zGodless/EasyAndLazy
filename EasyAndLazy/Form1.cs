@@ -279,6 +279,7 @@ namespace EasyAndLazy
                             }
                             else
                             {
+                                form1.Dispose();
                                 form1.Close();//已打开，关闭
                             }
                             break;
