@@ -39,6 +39,7 @@ namespace EasyAndLazy
                 new MyKey{ id = 1001, keyA = HotKey.KeyModifiers.Alt, keyB = Keys.D, op = operateMode.nextPage },
                 new MyKey{ id = 1002, keyA = HotKey.KeyModifiers.Ctrl, keyB = Keys.J, op = operateMode.nextPage },
                 new MyKey{ id = 1003, keyA = HotKey.KeyModifiers.None, keyB = Keys.MButton, op = operateMode.nextPage },
+                new MyKey{ id = 1004, keyA = HotKey.KeyModifiers.Ctrl, keyB = Keys.LButton, op = operateMode.nextPage },
                 //关闭
                 new MyKey{ id = 102,  keyA = HotKey.KeyModifiers.Alt, keyB = Keys.Q, op = operateMode.close },
                 new MyKey{ id = 1021, keyA = HotKey.KeyModifiers.Alt, keyB = Keys.O, op = operateMode.close },
@@ -74,8 +75,27 @@ namespace EasyAndLazy
             simpleButton1.MouseDown += Form1_MouseDown;
             simpleButton1.MouseMove += Form1_MouseMove;
             simpleButton1.MouseUp += Form1_MouseUp;
+
+            MouseWheel += Form1_MouseWheel;
         }
-        
+
+        private void Form1_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if ((int)Control.ModifierKeys == (int)Keys.Control)//判断是否按下ctrl
+            {
+                if (e.Delta < 0)    //鼠标滚轮向下滚
+                {
+                    CurIndex++;
+                    textEdit1.Text = StoryText[CurIndex];
+                }
+                else    //鼠标滚轮向上滚
+                {
+                    CurIndex++;
+                    textEdit1.Text = StoryText[CurIndex];
+                }
+            }
+        }
+
         #endregion
         #region 属性
 
@@ -185,8 +205,8 @@ namespace EasyAndLazy
         }
         #endregion
         #region 方法
-        /// <summary>
 
+        /// <summary>
         /// 加载文本
         /// </summary>
         /// <param name="filePath">加载路径</param>
@@ -258,16 +278,16 @@ namespace EasyAndLazy
                         case operateMode.notExist: break;
                         //上一页
                         case operateMode.prePage:
-                            CurIndex++;
-                            textEdit1.Text = StoryText[CurIndex];
-                            break;
-                        //下一页
-                        case operateMode.nextPage:
                             if (CurIndex != 0)
                             {
                                 CurIndex--;
                                 textEdit1.Text = StoryText[CurIndex];
                             }
+                            break;
+                        //下一页
+                        case operateMode.nextPage:
+                            CurIndex++;
+                            textEdit1.Text = StoryText[CurIndex];
                             break;
                         //关闭
                         case operateMode.close:
@@ -293,16 +313,16 @@ namespace EasyAndLazy
                             break;
                         //减透明度
                         case operateMode.reduceOpacity:
-                            if (Opacity < 0.9f)
+                            if (Opacity > 0.01f)
                             {
-                                Opacity += 0.01;
+                                Opacity -= 0.01;
                             }
                             break;
                         //加透明度
                         case operateMode.addOpacity:
-                            if (Opacity > 0.1f)
+                            if (Opacity < 0.99f)
                             {
-                                Opacity -= 0.01;
+                                Opacity += 0.01;
                             }
                             break;
                         //窗体移动
@@ -335,7 +355,6 @@ namespace EasyAndLazy
                         textEdit1.Text = StoryText[CurIndex];
                     }
                     break;
-
             }
             base.WndProc(ref m);
         }
