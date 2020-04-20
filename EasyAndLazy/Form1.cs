@@ -114,7 +114,7 @@ namespace EasyAndLazy
         List<MyKey> keyList = new List<MyKey>();
 
         //搜索窗体
-        public FormSearch form1;
+        public FormSearch2 form1;
         #endregion
 
         #region 事件
@@ -294,7 +294,7 @@ namespace EasyAndLazy
                         case operateMode.search:
                             if (form1 == null || form1.IsDisposed)
                             {
-                                form1 = new FormSearch();
+                                form1 = new FormSearch2();
                                 form1.StoryText = StoryText.ToList();
                                 if (form1.ShowDialog() == DialogResult.OK)
                                 {
