@@ -190,3 +190,14 @@ F:\张永亮\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.csproj.Generat
 F:\张永亮\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.exe.licenses
 F:\张永亮\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.csproj.CopyComplete
 F:\张永亮\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.csprojAssemblyReference.cache
+F:\zyl\Github\EasyAndLazy\EasyAndLazy\bin\Debug\EasyAndLazy.exe.config
+F:\zyl\Github\EasyAndLazy\EasyAndLazy\bin\Debug\EasyAndLazy.exe
+F:\zyl\Github\EasyAndLazy\EasyAndLazy\bin\Debug\EasyAndLazy.pdb
+F:\zyl\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.csprojResolveAssemblyReference.cache
+F:\zyl\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.Form1.resources
+F:\zyl\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.FormSearch.resources
+F:\zyl\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.Properties.Resources.resources
+F:\zyl\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.csproj.GenerateResource.Cache
+F:\zyl\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.exe.licenses
+F:\zyl\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.exe
+F:\zyl\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.pdb

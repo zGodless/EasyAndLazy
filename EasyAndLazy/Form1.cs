@@ -81,18 +81,15 @@ namespace EasyAndLazy
 
         private void Form1_MouseWheel(object sender, MouseEventArgs e)
         {
-            if ((int)Control.ModifierKeys == (int)Keys.Control)//判断是否按下ctrl
+            if (e.Delta < 0)    //鼠标滚轮向下滚
             {
-                if (e.Delta < 0)    //鼠标滚轮向下滚
-                {
-                    CurIndex++;
-                    textEdit1.Text = StoryText[CurIndex];
-                }
-                else    //鼠标滚轮向上滚
-                {
-                    CurIndex++;
-                    textEdit1.Text = StoryText[CurIndex];
-                }
+                CurIndex++;
+                textEdit1.Text = StoryText[CurIndex];
+            }
+            else    //鼠标滚轮向上滚
+            {
+                CurIndex--;
+                textEdit1.Text = StoryText[CurIndex];
             }
         }
 
