@@ -27,7 +27,7 @@ namespace EasyAndLazy
                 keyList = new List<MyKey>();
             }
 
-            keyList.AddRange(new []
+            keyList.AddRange(new[]
             {
                 //上一页
                 new MyKey{ id = 101,  keyA = HotKey.KeyModifiers.Ctrl, keyB = Keys.K, op = operateMode.prePage},
@@ -63,7 +63,7 @@ namespace EasyAndLazy
             SetWindowPos(this.Handle, -1, 0, 0, 0, 0, 1 | 2);
 
             textWide = HowMuchWord() - 5;
-            
+
         }
 
 
@@ -101,6 +101,8 @@ namespace EasyAndLazy
         public int CurIndex { get; set; }   //当前阅读行
         private INIClass ini { get; set; }      //配置类
         private string section { get; set; }    //当前配置项
+        private DateTime timeTag = DateTime.Now;     //上一次快捷键输入时间
+        private int increaseRatio = 1;     //位移增量
 
         //用于拖动窗口
         bool beginMove = false;//初始化鼠标位置  
@@ -324,23 +326,16 @@ namespace EasyAndLazy
                             break;
                         //窗体移动
                         case operateMode.formUp:
-                            GetWindowRect(Handle, ref currentRect);
-                            Top--;
+                            checkIncrease(0, false);
                             break;
                         case operateMode.formDown:
-                            currentRect = new RECT();
-                            GetWindowRect(Handle, ref currentRect);
-                            Top++;
+                            checkIncrease(0, true);
                             break;
                         case operateMode.formLeft:
-                            currentRect = new RECT();
-                            GetWindowRect(Handle, ref currentRect);
-                            Left--;
+                            checkIncrease(1, false);
                             break;
                         case operateMode.formRight:
-                            currentRect = new RECT();
-                            GetWindowRect(Handle, ref currentRect);
-                            Left++;
+                            checkIncrease(1, true);
                             break;
 
                     }
@@ -356,6 +351,39 @@ namespace EasyAndLazy
             base.WndProc(ref m);
         }
 
+        //窗体移动渐增
+        private void checkIncrease(int positionType, bool addOrnot)
+        {
+            RECT currentRect = new RECT();
+            GetWindowRect(Handle, ref currentRect);
+            int increaseNum;
+            if (DateTime.Now.Ticks - timeTag.Ticks < 500000)
+            {
+                if (increaseRatio >= 10)
+                {
+                    increaseNum = (addOrnot ? (increaseRatio / 5) : (-1 * (increaseRatio / 5)));
+                }
+                else
+                {
+                    increaseNum = (addOrnot ? 1 : -1);
+                }
+                increaseRatio++;
+            }
+            else
+            {
+                increaseNum = (addOrnot ? 1 : -1);
+                increaseRatio = 0;
+            }
+            if(positionType == 0)
+            {
+                Top += increaseNum;
+            }
+            else
+            {
+                Left += increaseNum;
+            }
+            timeTag = DateTime.Now;
+        }
         //计算当前文本框一行可以装多少个字
         private int HowMuchWord()
         {

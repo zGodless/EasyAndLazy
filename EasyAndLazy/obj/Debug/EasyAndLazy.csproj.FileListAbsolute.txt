@@ -199,3 +199,5 @@ F:\zyl\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.Properties.Resources
 F:\zyl\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.csproj.GenerateResource.Cache
 F:\zyl\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.exe
 F:\zyl\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.pdb
+F:\zyl\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.csprojAssemblyReference.cache
+F:\zyl\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.csproj.CoreCompileInputs.cache
