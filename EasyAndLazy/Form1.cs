@@ -48,7 +48,9 @@ namespace EasyAndLazy
                 new MyKey{ id = 103,  keyA = HotKey.KeyModifiers.Alt, keyB = Keys.F, op = operateMode.search },
                 //透明度
                 new MyKey{ id = 105,  keyA = HotKey.KeyModifiers.Alt, keyB = Keys.Up, op = operateMode.addOpacity },
+                new MyKey{ id = 1051,  keyA = HotKey.KeyModifiers.Alt, keyB = Keys.E, op = operateMode.addOpacity },
                 new MyKey{ id = 106,  keyA = HotKey.KeyModifiers.Alt, keyB = Keys.Down, op = operateMode.reduceOpacity },
+                new MyKey{ id = 106,  keyA = HotKey.KeyModifiers.Alt, keyB = Keys.W, op = operateMode.reduceOpacity },
                 //窗体移动
                 new MyKey{ id = 1071,  keyA = HotKey.KeyModifiers.Ctrl, keyB = Keys.Up, op = operateMode.formUp },
                 new MyKey{ id = 1072, keyA = HotKey.KeyModifiers.Ctrl, keyB = Keys.Down, op = operateMode.formDown },
@@ -269,7 +271,6 @@ namespace EasyAndLazy
             switch (m.Msg)
             {
                 case WM_HOTKEY:
-                    RECT currentRect = new RECT();
                     int id = m.WParam.ToInt32();
                     operateMode op = keyList.Find(k => k.id == id) == null ? operateMode.notExist : keyList.Find(k => k.id == id).op;
                     switch (op)

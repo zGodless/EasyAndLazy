@@ -201,3 +201,14 @@ F:\zyl\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.exe
 F:\zyl\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.pdb
 F:\zyl\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.csprojAssemblyReference.cache
 F:\zyl\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.csproj.CoreCompileInputs.cache
+E:\zyl\Github\EasyAndLazy\EasyAndLazy\bin\Debug\EasyAndLazy.exe.config
+E:\zyl\Github\EasyAndLazy\EasyAndLazy\bin\Debug\EasyAndLazy.exe
+E:\zyl\Github\EasyAndLazy\EasyAndLazy\bin\Debug\EasyAndLazy.pdb
+E:\zyl\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.Form1.resources
+E:\zyl\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.FormSearch2.resources
+E:\zyl\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.Properties.Resources.resources
+E:\zyl\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.csproj.GenerateResource.cache
+E:\zyl\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.csproj.CoreCompileInputs.cache
+E:\zyl\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.exe
+E:\zyl\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.pdb
+E:\zyl\Github\EasyAndLazy\EasyAndLazy\obj\Debug\EasyAndLazy.csproj.AssemblyReference.cache
