@@ -77,6 +77,7 @@ namespace EasyAndLazy
             simpleButton1.MouseDown += Form1_MouseDown;
             simpleButton1.MouseMove += Form1_MouseMove;
             simpleButton1.MouseUp += Form1_MouseUp;
+            textEdit1.DoubleClick += TextEdit1_DoubleClick;
 
             MouseWheel += Form1_MouseWheel;
         }
@@ -173,6 +174,23 @@ namespace EasyAndLazy
             Opacity = Convert.ToDouble(ini.IniReadValue(section, "Opacity"));     //获取上次透明度
         }
 
+
+        private void TextEdit1_DoubleClick(object sender, EventArgs e)
+        {
+            if (!textBox.Visible)
+            {
+                Height += textBox.Height;
+                textBox.Visible = true;
+                textBox.Top = textEdit1.Top + textEdit1.Height;
+                textBox.Text = StoryText[CurIndex];
+            }
+            else
+            {
+                Height -= textBox.Height;
+                textBox.Visible = false;
+                textBox.Text = "";
+            }
+        }
         private void Form1_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -213,7 +231,7 @@ namespace EasyAndLazy
         /// <param name="filePath">加载路径</param>
         private void LoadText(string filePath)
         {
-            StoryText = new string[300000];
+            StoryText = new string[3000000];
             Encoding ed = EncodingType.GetType(filePath);
             HoleReader = new StreamReader(filePath, ed);     //读取文本
             string line = "";
