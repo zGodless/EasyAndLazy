@@ -41,7 +41,7 @@
             this.simpleButton1.Margin = new System.Windows.Forms.Padding(0);
             this.simpleButton1.MaximumSize = new System.Drawing.Size(20, 20);
             this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(20, 19);
+            this.simpleButton1.Size = new System.Drawing.Size(20, 16);
             this.simpleButton1.TabIndex = 1;
             this.simpleButton1.Text = "button1";
             this.simpleButton1.UseVisualStyleBackColor = true;
@@ -53,15 +53,15 @@
             this.textEdit1.Location = new System.Drawing.Point(0, 0);
             this.textEdit1.MaximumSize = new System.Drawing.Size(1492, 20);
             this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Size = new System.Drawing.Size(977, 19);
+            this.textEdit1.Size = new System.Drawing.Size(977, 16);
             this.textEdit1.TabIndex = 0;
             this.textEdit1.Text = "label1";
             // 
             // textBox
             // 
-            this.textBox.Location = new System.Drawing.Point(136, 0);
+            this.textBox.Location = new System.Drawing.Point(2, -2);
             this.textBox.Name = "textBox";
-            this.textBox.Size = new System.Drawing.Size(616, 21);
+            this.textBox.Size = new System.Drawing.Size(975, 21);
             this.textBox.TabIndex = 2;
             this.textBox.Visible = false;
             // 
@@ -70,7 +70,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1000, 19);
+            this.ClientSize = new System.Drawing.Size(1000, 16);
             this.Controls.Add(this.textBox);
             this.Controls.Add(this.textEdit1);
             this.Controls.Add(this.simpleButton1);
