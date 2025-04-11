@@ -80,6 +80,12 @@ namespace EasyAndLazy
             textEdit1.DoubleClick += TextEdit1_DoubleClick;
 
             MouseWheel += Form1_MouseWheel;
+            FormClosed += Form1_FormClosed;
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            FormClose(false);
         }
 
         private void Form1_MouseWheel(object sender, MouseEventArgs e)
@@ -88,11 +94,13 @@ namespace EasyAndLazy
             {
                 CurIndex++;
                 textEdit1.Text = StoryText[CurIndex];
+                calculateReadPercent(CurIndex);
             }
             else    //鼠标滚轮向上滚
             {
                 CurIndex--;
                 textEdit1.Text = StoryText[CurIndex];
+                calculateReadPercent(CurIndex);
             }
         }
 
@@ -106,6 +114,7 @@ namespace EasyAndLazy
         private string section { get; set; }    //当前配置项
         private DateTime timeTag = DateTime.Now;     //上一次快捷键输入时间
         private int increaseRatio = 1;     //位移增量
+        private int totalLineCount = 0; //文本总行数
 
         //用于拖动窗口
         bool beginMove = false;//初始化鼠标位置  
@@ -170,6 +179,7 @@ namespace EasyAndLazy
             if (CurIndex != 0)
             {
                 textEdit1.Text = StoryText[CurIndex];
+                labelPercent.Text = $"{Math.Round((float)CurIndex/totalLineCount, 2) * 100}%  {CurIndex}/{totalLineCount}";
             }
             Opacity = Convert.ToDouble(ini.IniReadValue(section, "Opacity"));     //获取上次透明度
         }
@@ -181,7 +191,7 @@ namespace EasyAndLazy
             {
                 Height += textBox.Height;
                 textBox.Visible = true;
-                textBox.Top = textEdit1.Top + textEdit1.Height;
+                textBox.Top = textEdit1.Top + textEdit1.Height - 5;
                 textBox.Text = StoryText[CurIndex];
             }
             else
@@ -266,10 +276,11 @@ namespace EasyAndLazy
                 {
                     StoryText[i] = line;
                 }
+                totalLineCount = i;//记录总行数
             }
         }
 
-        private void FormClose()
+        private void FormClose(bool callClose = true)
         {
             //卸载快捷键
             keyList.ForEach(m => HotKey.UnregisterHotKey(Handle, m.id));
@@ -278,7 +289,10 @@ namespace EasyAndLazy
             ini.IniWriteValue(section, "ReadIndex", CurIndex.ToString().Trim());
             //记录当前透明度
             ini.IniWriteValue(section, "Opacity", Opacity.ToString());
-            Close();
+            if (callClose)
+            {
+                Close();
+            }
         }
         //重写WndProc()方法，通过监视系统消息，来调用过程
         protected override void WndProc(ref Message m)//监视Windows消息
@@ -300,12 +314,14 @@ namespace EasyAndLazy
                             {
                                 CurIndex--;
                                 textEdit1.Text = StoryText[CurIndex];
+                                calculateReadPercent(CurIndex);
                             }
                             break;
                         //下一页
                         case operateMode.nextPage:
                             CurIndex++;
                             textEdit1.Text = StoryText[CurIndex];
+                            calculateReadPercent(CurIndex);
                             break;
                         //关闭
                         case operateMode.close:
@@ -411,6 +427,15 @@ namespace EasyAndLazy
             SizeF sizeF = graphics.MeasureString("文", new Font("宋体", 9));
             float wordNum = textEdit1.Width / sizeF.Width;
             return Convert.ToInt32(wordNum);
+        }
+
+        /// <summary>
+        /// 计算阅读百分比
+        /// </summary>
+        /// <param name="curIndex"></param>
+        private void calculateReadPercent(int curIndex)
+        {
+            labelPercent.Text = $"{Math.Round((float)curIndex/totalLineCount, 2) * 100}%  {curIndex}/{totalLineCount}";
         }
         #endregion
         
